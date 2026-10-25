@@ -6,6 +6,7 @@ import '@fontsource-variable/manrope/wght.css';
 import './styles/base.css';
 import './styles/sections.css';
 import './styles/gallery.css';
+import './styles/redesign.css';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(

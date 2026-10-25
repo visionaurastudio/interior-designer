@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
-import { GALLERY_ORDER, PHOTOS } from '../data/photos';
+import { PHOTOS } from '../data/photos';
 import { bestUrl } from './Img';
 import { lockScroll } from '../hooks/useLenis';
 
@@ -8,6 +8,8 @@ interface Props {
   index: number | null;
   onClose: () => void;
   onIndex: (i: number) => void;
+  /** Photo ids, in the order they can be browsed. */
+  order: string[];
 }
 
 const slide = {
@@ -16,12 +18,12 @@ const slide = {
   exit: (d: number) => ({ x: d > 0 ? -90 : 90, opacity: 0, scale: 0.97 }),
 };
 
-export default function Lightbox({ index, onClose, onIndex }: Props) {
+export default function Lightbox({ index, onClose, onIndex, order }: Props) {
   const [dir, setDir] = useState(1);
   const dialog = useRef<HTMLDivElement>(null);
   const opener = useRef<Element | null>(null);
   const isOpen = index !== null;
-  const total = GALLERY_ORDER.length;
+  const total = order.length;
 
   const go = useCallback(
     (step: number) => {
@@ -73,7 +75,7 @@ export default function Lightbox({ index, onClose, onIndex }: Props) {
   useEffect(() => {
     if (index === null) return;
     [1, -1, 2].forEach((s) => {
-      const id = GALLERY_ORDER[(index + s + total) % total];
+      const id = order[(index + s + total) % total];
       new Image().src = bestUrl(id);
     });
   }, [index, total]);
@@ -84,7 +86,7 @@ export default function Lightbox({ index, onClose, onIndex }: Props) {
     else if (info.offset.y > 120) onClose();
   };
 
-  const id = index !== null ? GALLERY_ORDER[index] : null;
+  const id = index !== null ? order[index] : null;
   const photo = id ? PHOTOS[id] : null;
 
   return (

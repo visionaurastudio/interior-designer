@@ -32,8 +32,16 @@ export const NAV = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'kitchens', label: 'Kitchens' },
-  { id: 'work', label: 'Our Work' },
-  { id: 'why', label: 'Why Us' },
+  { id: 'tv', label: 'TV Units' },
+  { id: 'wardrobes', label: 'Wardrobes' },
   { id: 'process', label: 'Process' },
   { id: 'contact', label: 'Contact' },
 ] as const;
+
+const digits = BUSINESS.phone.replace(/\D/g, '');
+export const TEL_HREF = `tel:${BUSINESS.phone.replace(/\s+/g, '')}`;
+/** Click-to-chat link built from the business phone number. */
+export const WA_MESSAGE =
+  'Hello Shree Shiv Steel Art! I visited your website and would like to enquire about your modular kitchens, TV units, wardrobes, and furniture. Please share more details.';
+export const waUrl = (text = WA_MESSAGE) =>
+  `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;

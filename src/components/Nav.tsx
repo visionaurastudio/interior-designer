@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { NAV, BUSINESS } from '../config';
+import { NAV, BUSINESS, TEL_HREF, waUrl } from '../config';
 import { lockScroll, scrollToId } from '../hooks/useLenis';
 
 export default function Nav({ visible }: { visible: boolean }) {
@@ -9,7 +9,7 @@ export default function Nav({ visible }: { visible: boolean }) {
   const [active, setActive] = useState('home');
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 60));
+  useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 40));
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -28,14 +28,11 @@ export default function Nav({ visible }: { visible: boolean }) {
     if (!open) return;
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
     window.addEventListener('keydown', esc);
-    return () => {
-      window.removeEventListener('keydown', esc);
-    };
+    return () => window.removeEventListener('keydown', esc);
   }, [open]);
 
   const go = (id: string) => {
     setOpen(false);
-    // let the menu close and scroll lock release before scrolling
     setTimeout(() => scrollToId(id), open ? 450 : 0);
   };
 
@@ -43,18 +40,25 @@ export default function Nav({ visible }: { visible: boolean }) {
     <>
       <motion.header
         className={`nav${scrolled ? ' is-scrolled' : ''}${open ? ' is-open' : ''}`}
-        initial={{ y: -40, opacity: 0 }}
+        initial={{ y: -30, opacity: 0 }}
         animate={visible ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
       >
+        <div className="nav__util">
+          <div className="nav__util-in">
+            <p className="nav__util-info">{BUSINESS.hours} · Opposite Vile Parle Railway Station</p>
+            <div className="nav__util-links">
+              <a href={TEL_HREF}>Call {BUSINESS.phone}</a>
+              <a href={waUrl()} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); go('contact'); }}>Free consultation</a>
+            </div>
+          </div>
+        </div>
         <div className="nav__bar">
           <a
             className="nav__logo"
             href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              go('home');
-            }}
+            onClick={(e) => { e.preventDefault(); go('home'); }}
             aria-label="Shree Shiv Steel Art — home"
           >
             <span className="nav__mark" aria-hidden="true">SS</span>
@@ -68,10 +72,7 @@ export default function Nav({ visible }: { visible: boolean }) {
                 href={`#${n.id}`}
                 className={active === n.id ? 'is-active' : ''}
                 aria-current={active === n.id ? 'true' : undefined}
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(n.id);
-                }}
+                onClick={(e) => { e.preventDefault(); go(n.id); }}
               >
                 {n.label}
               </a>
@@ -79,14 +80,7 @@ export default function Nav({ visible }: { visible: boolean }) {
           </nav>
 
           <div className="nav__right">
-            <a
-              className="nav__cta"
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                go('contact');
-              }}
-            >
+            <a className="nav__cta" href="#contact" onClick={(e) => { e.preventDefault(); go('contact'); }}>
               Get a Quote
             </a>
             <button
@@ -121,14 +115,11 @@ export default function Nav({ visible }: { visible: boolean }) {
                 <li key={n.id} className="menu__item">
                   <motion.a
                     href={`#${n.id}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      go(n.id);
-                    }}
+                    onClick={(e) => { e.preventDefault(); go(n.id); }}
                     initial={{ y: 60, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 + i * 0.06 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 + i * 0.05 }}
                   >
                     <small>{String(i + 1).padStart(2, '0')}</small>
                     {n.label}
@@ -143,16 +134,7 @@ export default function Nav({ visible }: { visible: boolean }) {
               exit={{ opacity: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              <a
-                className="menu__quote"
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  go('contact');
-                }}
-              >
-                Get a Free Consultation
-              </a>
+              <a className="menu__quote" href={TEL_HREF}>Call {BUSINESS.phone}</a>
               <p>
                 {BUSINESS.locality.split(',').slice(0, 2).join(',')}
                 <br />

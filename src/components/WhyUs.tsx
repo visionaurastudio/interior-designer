@@ -13,12 +13,12 @@ const POINTS = [
 
 export default function WhyUs() {
   return (
-    <section id="why" className="why section" aria-labelledby="why-title">
+    <section id="why" className="why sec sec--light" aria-labelledby="why-title">
       <div className="container why__grid">
         <div className="why__media">
           <ImageReveal className="why__img hoverzoom">
             <Parallax amount={8}>
-              <Img id="c12" sizes="(max-width: 900px) 90vw, 40vw" position="50% 50%" />
+              <Img id="c11" sizes="(max-width: 900px) 90vw, 40vw" position="50% 50%" />
             </Parallax>
           </ImageReveal>
           <Reveal className="why__tag" delay={0.4}>
@@ -31,7 +31,7 @@ export default function WhyUs() {
           <Reveal>
             <p className="eyebrow">Why Shree Shiv Steel Art</p>
           </Reveal>
-          <RevealText as="h2" className="display why__title" text="Built to _Last." />
+          <RevealText as="h2" className="display sec__title" text="Built to _last." />
           <span id="why-title" hidden>Built to Last</span>
           <ul className="why__list">
             {POINTS.map(([t, d], i) => (

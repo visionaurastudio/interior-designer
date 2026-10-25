@@ -1,42 +1,42 @@
-# Shree Shiv Steel Art — website (v2: real photos + 3D studio)
+# Shree Shiv Steel Art — website (v3: light catalogue redesign)
 
-React + TypeScript + Vite · Framer Motion · Lenis · Three.js (React Three Fiber / drei, lazy-loaded).
+React + TypeScript + Vite · Framer Motion · Lenis · 
 
-## Run
+## Run / build / deploy
 ```bash
 npm install
-npm run dev        # development
+npm run dev
 npm run build      # type-check + production build -> dist/
-npm run preview    # serve the production build
+npm run preview
 ```
-`dist/` is static with relative paths, so it works on GitHub Pages under `/interior-designer/` (tested by serving
-it from a sub-folder) or any other host.
+All asset URLs are relative (`base: './'`), so the build works at a domain root (Vercel) or under a sub-path
+(GitHub Pages). On Vercel: framework preset Vite, build command `npm run build`, output directory `dist`.
 
-## What changed in this version
-* **Photography:** all site imagery now comes from the client's second ZIP (20 photos, `public/images/c01…c20`,
-  WebP at 480/960/1440 px). Originals are kept in `assets-original/client-photos/` (not deployed) with
-  `FILENAME-MAP.txt` listing the original WhatsApp filenames. The earlier 42-image set was removed from the site.
-* **Business details** (`src/config.ts`): address, +91 9892851153 (`tel:` links), hours, payments, services list (11),
-  listed-since-2000 wording, directory rating shown only as an unverified directory detail. No email or social links exist.
-* **3D Studio** (`src/studio/`): opens full screen from the "See it in 3D" section and the gallery button.
-  Modular kitchen (3 layouts), TV unit, wardrobe. All procedural prototypes.
-* **Enquiry:** the studio sends its configuration into the enquiry form. With no form service connected the form does
-  **not** pretend to send; it offers WhatsApp / SMS / call / copy using the supplied number. To receive enquiries
-  directly, set `formEndpoint` in `src/config.ts`.
-* Animations, layout, typography and navigation are unchanged. The custom cursor stays removed (previous request).
+## What changed in v3
+* **Redesign** (`src/styles/redesign.css` + new section components): light, catalogue-style layout with a utility
+  bar (phone, WhatsApp, free consultation) over a white header, hero + facts strip, service tiles, uppercase section
+  titles, large photography, and dark bands for process, contact and footer.
+* **Automatic kitchen slider** (`KitchenSlider.tsx`): 10 real kitchen photos, cross-fade, previous/next, indicators,
+  swipe, keyboard arrows, pause button, pauses on hover/focus/off-screen/hidden tab, fixed aspect ratio (no layout shift),
+  next images load lazily. Autoplay is off for visitors who prefer reduced motion.
+* **TV units** and **wardrobes** sections with real photographs and a full-screen viewer.
+* **Removed:** the wall-niche (mandir) photo, the ₹400–₹8,000 kitchen-rack price text, the old marquee and decorative blocks.
+* **Phone and WhatsApp** stay reachable: utility bar, header, contact section, footer, a fixed Call / Enquire bar on small screens, and a floating green WhatsApp button (bottom-right) that opens `wa.me/919892851153` with a pre-filled message the visitor reviews and sends.
+  bar on small screens.
+* Business details and the enquiry flow (no fake sends) are unchanged from v2.
 
-## Photo → section map
+## Photo -> section map (v4)
 | Section | Photos |
 |---|---|
-| Hero | c07 (float card: c15) |
-| About | c09, c11 |
-| Services | c02 modular kitchen, c13 accessories, c15 loft, c10 TV unit (services without a photo show a typographic panel) |
-| Gallery | c03, c08, c05, finishes c16–c20, c14, c15, c13, c10, c06, c01 |
-| 3D Studio cards | c02, c10 |
-| Why us / Process / Contact | c12 / c01 (faint) / c04 |
+| Hero / What we do (kitchen) / About | c07 / c02 / c09 |
+| Kitchen slider (5 slides) | c05, c03, c12, c06, c01 |
+| One kitchen, three finishes | c16, c18, c19 |
+| Why us / Process (faint) / Contact | c11 / c08 / c04 |
+| Kitchen accessories / Kitchen loft tiles | c13 / c15 |
+| TV units & feature walls | tv3, c10, tv2, tv1 |
+| Wardrobes | wd5, wd4, wd3, wd2, wd1 |
+`assets-original/` keeps every supplied photo (not deployed). The separate Gallery section was folded into the category sections.
 
-## 3D studio notes
-* `three/` holds geometry, materials, procedural textures, layouts and scenes; `components/` the UI; `Studio.tsx` the shell.
-* Materials are updated in place from typed config; geometry/textures/materials are disposed when the studio closes.
-* Models are procedural prototypes. To use real `.glb` files, name meshes by surface (base_, wall_, island_, counter_, hardware_)
-  and map them to the shared materials; this adapter is not written because no real model exists yet.
+## v5
+* The 3D studio (section, three prototypes, launchers, code and Three.js dependencies) was removed; the kitchen, TV unit and wardrobe sections and their photos are unchanged.
+* Removed the product photo that sat at the end of the contact block, just above the footer; the footer itself is now compact.

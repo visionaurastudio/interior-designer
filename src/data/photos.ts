@@ -14,19 +14,18 @@ export const PHOTOS: Record<string, Photo> = {
   c11: { id: 'c11', w: 1080, h: 1080, widths: [480, 960, 1080], bg: '#474b47', alt: "Teal gloss base cabinets with glass-door wall units and a stone-look backsplash", label: "Kitchen" },
   c12: { id: 'c12', w: 1440, h: 1800, widths: [480, 960, 1440], bg: '#464a4b', alt: "Sky-blue and white L-shaped kitchen with glazed upper units and a patterned backsplash", label: "Kitchen" },
   c13: { id: 'c13', w: 1440, h: 1080, widths: [480, 960, 1440], bg: '#3f443f', alt: "Pull-out drawer organiser holding crockery and cookware", label: "Kitchen storage" },
-  c14: { id: 'c14', w: 1440, h: 1695, widths: [480, 960, 1440], bg: '#534839', alt: "Illuminated timber wall niche with shelves and storage drawers below", label: "Wall unit" },
   c15: { id: 'c15', w: 1058, h: 1196, widths: [480, 960, 1058], bg: '#4b4339', alt: "Glass-front loft cabinets with warm lighting above a grey base unit", label: "Kitchen loft" },
   c16: { id: 'c16', w: 1440, h: 1440, widths: [480, 960, 1440], bg: '#59574e', alt: "The same L-shaped kitchen in sage green", label: "Finish option" },
   c17: { id: 'c17', w: 1440, h: 1440, widths: [480, 960, 1440], bg: '#5e5752', alt: "The same L-shaped kitchen in taupe", label: "Finish option" },
   c18: { id: 'c18', w: 1440, h: 1440, widths: [480, 960, 1440], bg: '#595451', alt: "The same L-shaped kitchen in slate blue", label: "Finish option" },
   c19: { id: 'c19', w: 1440, h: 1440, widths: [480, 960, 1440], bg: '#5d564f', alt: "The same L-shaped kitchen in cream", label: "Finish option" },
   c20: { id: 'c20', w: 1440, h: 1440, widths: [480, 960, 1440], bg: '#5a544f', alt: "The same L-shaped kitchen in light grey", label: "Finish option" },
+  tv1: { id: 'tv1', w: 736, h: 736, widths: [480, 736], bg: '#423c2d', alt: 'Wall-mounted TV panel with warm backlighting, a floating console and a lit shelf column', label: 'TV wall' },
+  tv2: { id: 'tv2', w: 736, h: 890, widths: [480, 736], bg: '#4b4945', alt: 'White fluted TV wall with a backlit panel, floating console and lit display niches on both sides', label: 'TV wall' },
+  tv3: { id: 'tv3', w: 736, h: 862, widths: [480, 736], bg: '#46433c', alt: 'TV on a marble-look panel framed by grey fluted wall panels, with a lit shelf unit and a long low console', label: 'TV wall' },
+  wd2: { id: 'wd2', w: 736, h: 981, widths: [480, 736], bg: '#3b3f45', alt: 'Navy built-in wardrobe with open shelves, drawers and brass handles', label: 'Wardrobe' },
+  wd3: { id: 'wd3', w: 736, h: 981, widths: [480, 736], bg: '#4f504a', alt: 'Sage-teal wardrobe with loft cabinets and a lit mirror dressing corner', label: 'Wardrobe' },
+  wd4: { id: 'wd4', w: 563, h: 704, widths: [480, 563], bg: '#51473d', alt: 'Taupe and timber wardrobe with loft cabinets and a lit mirror unit with drawers', label: 'Wardrobe' },
+  wd5: { id: 'wd5', w: 1159, h: 1391, widths: [480, 960], bg: '#584738', alt: 'Walnut and cream wardrobe with loft cabinets, fluted detailing and a lit dressing unit', label: 'Wardrobe' },
+  wd1: { id: 'wd1', w: 736, h: 1318, widths: [480, 736], bg: '#494d51', alt: 'Grey wardrobe with mirrored doors, drawers and a loft above', label: 'Wardrobe' },
 };
-
-/** Order used by the fullscreen lightbox (matches the on-page order of the gallery). */
-export const GALLERY_ORDER: string[] = [
-  'c03', 'c08', 'c05',
-  'c16', 'c17', 'c18', 'c19', 'c20',
-  'c14', 'c15', 'c13',
-  'c10', 'c06', 'c01',
-];

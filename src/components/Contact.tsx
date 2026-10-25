@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Img from './Img';
 import Button from './Magnetic';
-import { ImageReveal, Reveal, RevealText, EASE } from './Reveal';
+import { Reveal, RevealText, EASE } from './Reveal';
 import { BUSINESS } from '../config';
-import { ENQUIRY_EVENT, type EnquiryDraft } from '../enquiry';
 
 const TYPES = ['Modular Kitchen', 'Kitchen Accessories / Loft', 'TV Unit', 'Wardrobe / Bedroom', 'Other'];
 type Status = 'idle' | 'sending' | 'sent' | 'compose' | 'error';
@@ -17,22 +15,6 @@ export default function Contact() {
   const [draft, setDraft] = useState('');
   const [copied, setCopied] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  // pre-fill from the 3D studio
-  useEffect(() => {
-    const on = (e: Event) => {
-      const d = (e as CustomEvent<EnquiryDraft>).detail;
-      if (d.projectType && TYPES.includes(d.projectType)) setType(d.projectType);
-      const ta = form.current?.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
-      if (ta && d.message !== undefined) {
-        ta.value = d.message;
-        ta.rows = Math.min(10, Math.max(3, d.message.split('\n').length));
-      }
-      setStatus('idle');
-    };
-    window.addEventListener(ENQUIRY_EVENT, on);
-    return () => window.removeEventListener(ENQUIRY_EVENT, on);
-  }, []);
 
   const focusForm = () => {
     form.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus({ preventScroll: true });
@@ -136,10 +118,6 @@ export default function Contact() {
               <dd className="contact__small">{BUSINESS.listing}</dd>
             </div>
           </dl>
-
-          <ImageReveal className="contact__img hoverzoom">
-            <Img id="c04" sizes="(max-width: 900px) 60vw, 22vw" />
-          </ImageReveal>
         </div>
 
         <div className="contact__right">

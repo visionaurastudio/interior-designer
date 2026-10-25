@@ -1,32 +1,23 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { useSmoothScroll } from './hooks/useLenis';
 import Loader from './components/Loader';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import Facts from './components/Facts';
+import WhatWeDo from './components/WhatWeDo';
 import About from './components/About';
-import Marquee from './components/Marquee';
-import Services from './components/Services';
-import Gallery from './components/Gallery';
+import KitchensSection from './components/KitchensSection';
+import PhotoShowcase from './components/PhotoShowcase';
 import WhyUs from './components/WhyUs';
 import Process from './components/Process';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import StudioSection from './components/StudioSection';
-import { STUDIO_EVENT } from './studio/studioBus';
-import type { Product } from './studio/types';
-
-const Studio = lazy(() => import('./studio/Studio'));
+import MobileBar from './components/MobileBar';
+import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
-  const [studio, setStudio] = useState<Product | null>(null);
-  useEffect(() => {
-    const on = (e: Event) => setStudio((e as CustomEvent<Product>).detail);
-    window.addEventListener(STUDIO_EVENT, on);
-    return () => window.removeEventListener(STUDIO_EVENT, on);
-  }, []);
-  const closeStudio = useCallback(() => setStudio(null), []);
   useSmoothScroll();
   const done = useCallback(() => setLoaded(true), []);
 
@@ -37,21 +28,35 @@ export default function App() {
       <Nav visible={loaded} />
       <main>
         <Hero loaded={loaded} />
+        <Facts />
+        <WhatWeDo />
         <About />
-        <Marquee />
-        <Services />
-        <Gallery />
-        <StudioSection />
+        <KitchensSection />
+        <PhotoShowcase
+          id="tv"
+          tone="paper"
+          eyebrow="TV units"
+          title="TV units &amp; _feature walls."
+          text="The wall behind the television is part of the design: stone-look and fluted panels, concealed lighting, lit display niches and a floating console, planned together to the width of your wall."
+          points={['Back panels in stone-look, fluted or textured finishes', 'Concealed lighting and lit display shelves', 'Floating or floor-standing consoles']}
+          photos={['tv3', 'c10', 'tv2', 'tv1']}
+        />
+        <PhotoShowcase
+          id="wardrobes"
+          tone="light"
+          eyebrow="Wardrobes"
+          title="Wardrobes, _made to measure."
+          text="Floor-to-ceiling wardrobes with loft storage, drawers and dressing units built in, finished in the colours and timber tones you choose, including sliding-door designs."
+          points={['Loft cabinets for seasonal storage', 'Drawers, open shelves and lit dressing corners', 'Finishes chosen with you']}
+          photos={['wd5', 'wd4', 'wd3', 'wd2', 'wd1']}
+        />
         <WhyUs />
         <Process />
         <Contact />
       </main>
       <Footer />
-      {studio && (
-        <Suspense fallback={<div className="studio-boot" role="status">Loading 3D studio…</div>}>
-          <Studio initial={studio} onClose={closeStudio} />
-        </Suspense>
-      )}
+      <MobileBar />
+      <WhatsAppButton />
     </MotionConfig>
   );
 }

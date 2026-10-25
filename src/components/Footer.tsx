@@ -1,4 +1,4 @@
-import { NAV, BUSINESS } from '../config';
+import { NAV, BUSINESS, TEL_HREF, waUrl } from '../config';
 import { scrollToId } from '../hooks/useLenis';
 import Button from './Magnetic';
 
@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="footer__name display">Shree Shiv Steel Art</p>
           <p className="footer__tag">Modular Kitchens • Furniture • Steel</p>
           <p className="footer__loc">{BUSINESS.addressLines.join(' ')}</p>
-          {BUSINESS.phone && <p className="footer__loc"><a href={`tel:${BUSINESS.phone.replace(/\s+/g, '')}`}>{BUSINESS.phone}</a></p>}
+          {BUSINESS.phone && <p className="footer__loc"><a href={TEL_HREF}>{BUSINESS.phone}</a> · <a href={waUrl()} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
         </div>
         <nav className="footer__nav" aria-label="Footer">
           {NAV.map((n) => (
@@ -28,7 +28,6 @@ export default function Footer() {
         <p>© {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
         <a href="#home" onClick={(e) => { e.preventDefault(); scrollToId('home'); }}>Back to top ↑</a>
       </div>
-      <p className="footer__giant" aria-hidden="true">Shree Shiv Steel Art</p>
     </footer>
   );
 }

@@ -28,7 +28,10 @@ export function useSmoothScroll() {
 export function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { offset: 0, duration: 1.4, easing: (t) => 1 - Math.pow(1 - t, 4) });
+  // the header is sticky, so stop just below it
+  const header = document.querySelector('.nav');
+  const offset = id === 'home' || !header ? 0 : -(header.getBoundingClientRect().height - 1);
+  if (lenis) lenis.scrollTo(el, { offset, duration: 1.4, easing: (t) => 1 - Math.pow(1 - t, 4) });
   else el.scrollIntoView({ behavior: 'auto', block: 'start' });
 }
 

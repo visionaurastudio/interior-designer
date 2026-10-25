@@ -55,7 +55,7 @@ function Desktop() {
     <div className="process__pin" ref={ref}>
       <div className="process__stick">
         <motion.div className="process__bg" style={{ y: bgY }} aria-hidden="true">
-          <Img id="c01" sizes="100vw" alt="" position="50% 50%" />
+          <Img id="c08" sizes="100vw" alt="" position="50% 50%" />
         </motion.div>
         <div className="container process__inner">
           <header className="process__head">

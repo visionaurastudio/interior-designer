@@ -1,7 +1,7 @@
 import { useRef, type ReactNode, type MouseEvent, type AnchorHTMLAttributes } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-type Variant = 'solid' | 'ghost';
+type Variant = 'solid' | 'ghost' | 'dark' | 'line';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'onClick'> {
   children: ReactNode;
